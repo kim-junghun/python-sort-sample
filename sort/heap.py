@@ -9,7 +9,7 @@ def sort(data):
         total -= 1
         _heapify(data, 0, total)
         
-    print(data)
+    # print(data)
     
 
 def _heapify(data, i, total):

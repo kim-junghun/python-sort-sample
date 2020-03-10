@@ -14,4 +14,4 @@ def sort(data):
 
         gap = gap // 2
 
-    print(data)
+    # print(data)

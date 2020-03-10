@@ -8,4 +8,4 @@ def sort(data):
 
         if i != least:
             data[i], data[least] = data[least], data[i]
-    print(data)
+    # print(data)

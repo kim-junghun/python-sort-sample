@@ -1,6 +1,6 @@
 def sort(data):
     _sort_partition(data, 0, len(data) - 1)
-    print(data)
+    # print(data)
 
 
 def _sort_partition(data, low, high):

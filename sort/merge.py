@@ -1,6 +1,6 @@
 def sort(data):
     _merge_sort(data, 0, len(data))
-    print(data)
+    # print(data)
 
 
 def _merge_sort(data, low, high):
