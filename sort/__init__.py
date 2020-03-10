@@ -1,1 +1,1 @@
-__all__ = ['bubble', 'selection', 'quick', 'merge', 'heap']
+__all__ = ['bubble', 'selection', 'quick', 'merge', 'heap', 'insertion', 'shell']
