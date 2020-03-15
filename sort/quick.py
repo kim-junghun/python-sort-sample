@@ -1,9 +1,17 @@
+import copy
+
 def sort(data):
-    _sort_partition(data, 0, len(data) - 1)
+    frames = [copy.deepcopy(data)]
+
+    _sort_partition(data, 0, len(data) - 1, frames)
+
+    frames.append(data)
+
+    return frames
     # print(data)
 
 
-def _sort_partition(data, low, high):
+def _sort_partition(data, low, high, frames):
     if high - low > 0:
         i = low
         j = high
@@ -13,6 +21,8 @@ def _sort_partition(data, low, high):
         i += 1
 
         while i < j:
+
+            frames.append(copy.deepcopy(data))
             # 피벗보다 작은 값 찾음
             while i <= high and data[i] < pivot:
                 i += 1
@@ -23,10 +33,12 @@ def _sort_partition(data, low, high):
             # 작은 값 좌측, 큰 값 우측
             if i < j:
                 data[i], data[j] = data[j], data[i]
+
+                frames.append(copy.deepcopy(data))
         
         # 피벗 이동
         if data[low] > data[j]:
             data[low], data[j] = data[j], data[low]
 
-        _sort_partition(data, low, j - 1)
-        _sort_partition(data, j + 1, high)
+        _sort_partition(data, low, j - 1, frames)
+        _sort_partition(data, j + 1, high, frames)

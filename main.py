@@ -4,6 +4,9 @@ import random
 import sys
 import timeit
 
+from matplotlib import pyplot as plt
+from matplotlib import animation
+
 import sort
 # 실제 사용됨 (getattr)
 from sort import *
@@ -27,7 +30,7 @@ if __name__ == '__main__':
     print(args)
 
     if args.length is None:
-        length = 100
+        length = 10
     else:
         length = int(args.length)
 
@@ -65,10 +68,30 @@ if __name__ == '__main__':
             print('----------------------------------------------')
             print(f'execute {list(type_dict.keys())[i]} algorithm')
             start = timeit.default_timer()
-            getattr(globals()[list(type_dict.keys())[i]], 'sort')(sample)
+
+            frames = getattr(globals()[list(type_dict.keys())[i]], 'sort')(sample)
+
+            fig, axs = plt.subplots()
+            # plt.subplots_adjust(left=0.01, bottom=0.02, right=0.99, top=0.95,
+            #                     wspace=0.05, hspace=0.15)
+
+            def animate(i):
+                bars = []
+                if len(frames) > i:
+                    axs.cla()
+                    bars += axs.bar(list(range(length)),  # X
+                                    [d for d in frames[i]],  # data
+                                    1,  # width
+                                    ).get_children()
+                return bars
+
+            anim = animation.FuncAnimation(fig, animate, frames=len(frames), interval=50)
+            # anim.save('output.html', writer=animation.HTMLWriter(fps=25))
+
             stop = timeit.default_timer()
             print(f'Elapsed Time : {stop - start}')
             print('----------------------------------------------')
+            plt.show()
         else:
             continue
 
